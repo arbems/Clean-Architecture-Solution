@@ -5,13 +5,13 @@ namespace Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<Domain.Entities.Attribute> Attributes { get; }
-    DbSet<HeroAttribute> HeroAttributes { get; }
-    DbSet<HeroPower> HeroPowers { get; }
-    DbSet<Publisher> Publishers { get; }
-    DbSet<Race> Races { get; }
-    DbSet<Superhero> Superheroes { get; }
-    DbSet<Superpower> Superpowers { get; }
+    public DbSet<Domain.Entities.Attribute> Attributes { get; }
+    public DbSet<HeroAttribute> HeroAttributes { get; }
+    public DbSet<HeroPower> HeroPowers { get; }
+    public DbSet<Publisher> Publishers { get; }
+    public DbSet<Race> Races { get; }
+    public DbSet<Superhero> Superheroes { get; }
+    public DbSet<Superpower> Superpowers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

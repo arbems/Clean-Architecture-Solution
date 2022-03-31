@@ -8,7 +8,10 @@ public class HeroPowerConfiguration : IEntityTypeConfiguration<HeroPower>
 {
     public void Configure(EntityTypeBuilder<HeroPower> builder)
     {
-        builder.HasNoKey();
+        builder.HasKey(e => new {
+            e.HeroId,
+            e.PowerId
+        });
 
         builder.ToTable("hero_power");
 

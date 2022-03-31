@@ -81,8 +81,8 @@ public class ApplicationDbContextSeed
                 },
                 Powers =
                 {
-                    new HeroPower { PowerId = 1 },
-                    new HeroPower { PowerId = 2 }
+                    new HeroPower { PowerId = 1, HeroId = 2 },
+                    new HeroPower { PowerId = 2, HeroId = 2 }
                 }
             });
             context.Superheroes.Add(new Superhero
@@ -106,8 +106,8 @@ public class ApplicationDbContextSeed
                 },
                 Powers =
                 {
-                    new HeroPower { PowerId = 3 },
-                    new HeroPower { PowerId = 4 }
+                    new HeroPower { PowerId = 3, HeroId = 3 },
+                    new HeroPower { PowerId = 4, HeroId = 3 }
                 }
             });
             context.Superheroes.Add(new Superhero
@@ -131,8 +131,8 @@ public class ApplicationDbContextSeed
                 },
                 Powers =
                 {
-                    new HeroPower { PowerId = 1 },
-                    new HeroPower { PowerId = 2 }
+                    new HeroPower { PowerId = 1, HeroId = 4 },
+                    new HeroPower { PowerId = 2, HeroId = 4 }
                 }
             });
             context.Superheroes.Add(new Superhero
@@ -156,8 +156,8 @@ public class ApplicationDbContextSeed
                 },
                 Powers =
                 {
-                    new HeroPower { PowerId = 5 },
-                    new HeroPower { PowerId = 6 }
+                    new HeroPower { PowerId = 5, HeroId = 5 },
+                    new HeroPower { PowerId = 6, HeroId = 5 }
                 }
             });
             //...
