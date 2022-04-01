@@ -10,21 +10,7 @@ public class ApplicationDbContextSeed
         // Seed, if necessary
         if (!context.Attributes.Any())
         {
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 1, AttributeName = "Intelligence" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 2, AttributeName = "Strength" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 3, AttributeName = "Speed" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 4, AttributeName = "Durability" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 5, AttributeName = "Power" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 6, AttributeName = "Combat" });
-            //..
-
-            //context.HeroAttributes.Add(new HeroAttribute {  AttributeId = 1, SuperheroId = 1 });
-            //...
-
-            //context.HeroPowers.Add(new HeroPower { HeroId = 1, PowerId = 1 });
-            //...
-
-            context.Publishers.Add(new Publisher { Id = 1,  Publisher1 = "ABC Studios" });
+            context.Publishers.Add(new Publisher { Id = 1, Publisher1 = "ABC Studios" });
             context.Publishers.Add(new Publisher { Id = 2, Publisher1 = "DC Comics" });
             context.Publishers.Add(new Publisher { Id = 3, Publisher1 = "George Lucas" });
             context.Publishers.Add(new Publisher { Id = 4, Publisher1 = "Icon Comics" });
@@ -38,6 +24,22 @@ public class ApplicationDbContextSeed
             context.Races.Add(new Race { Id = 4, Race1 = "Demon" });
             context.Races.Add(new Race { Id = 5, Race1 = "Eternal" });
             context.Races.Add(new Race { Id = 6, Race1 = "Human" });
+            //...
+
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 1, AttributeName = "Intelligence" });
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 2, AttributeName = "Strength" });
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 3, AttributeName = "Speed" });
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 4, AttributeName = "Durability" });
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 5, AttributeName = "Power" });
+            context.Attributes.Add(new Domain.Entities.Attribute { Id = 6, AttributeName = "Combat" });
+            //..
+
+            context.Superpowers.Add(new Superpower { Id = 1, PowerName = "Agility" });
+            context.Superpowers.Add(new Superpower { Id = 2, PowerName = "Accelerated Healing" });
+            context.Superpowers.Add(new Superpower { Id = 3, PowerName = "Lantern Power Ring" });
+            context.Superpowers.Add(new Superpower { Id = 4, PowerName = "Cold Resistance" });
+            context.Superpowers.Add(new Superpower { Id = 5, PowerName = "Marksmanship" });
+            context.Superpowers.Add(new Superpower { Id = 6, PowerName = "Power Augmentation" });
             //...
 
             context.Superheroes.Add(new Superhero
@@ -58,6 +60,11 @@ public class ApplicationDbContextSeed
                 {
                     new HeroAttribute { AttributeId = 6 },
                     new HeroAttribute { AttributeId = 2 }
+                },
+                Powers =
+                {
+                    new HeroPower { PowerId = 3, HeroId = 1 },
+                    new HeroPower { PowerId = 4, HeroId = 1 }
                 }
             });
             context.Superheroes.Add(new Superhero
@@ -160,14 +167,6 @@ public class ApplicationDbContextSeed
                     new HeroPower { PowerId = 6, HeroId = 5 }
                 }
             });
-            //...
-
-            context.Superpowers.Add(new Superpower { Id = 1, PowerName = "Agility" });
-            context.Superpowers.Add(new Superpower { Id = 2, PowerName = "Accelerated Healing" });
-            context.Superpowers.Add(new Superpower { Id = 3, PowerName = "Lantern Power Ring" });
-            context.Superpowers.Add(new Superpower { Id = 4, PowerName = "Cold Resistance" });
-            context.Superpowers.Add(new Superpower { Id = 5, PowerName = "Marksmanship" });
-            context.Superpowers.Add(new Superpower { Id = 6, PowerName = "Power Augmentation" });
             //...
 
             await context.SaveChangesAsync();
