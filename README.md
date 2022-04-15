@@ -1,5 +1,5 @@
-# Clean-Architecture-DDD-CQRS
-Solución siguiendo los principios de Clean Architecture.
+# Solución Clean Architecture
+Solución siguiendo los principios de Clean Architecture usando .NET 6
 
 ## Tecnologías
 * NET 6 / C#
