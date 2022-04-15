@@ -1,4 +1,4 @@
-# Solución Clean Architecture
+# Clean Architecture con .NET 6
 Solución siguiendo los principios de Clean Architecture usando .NET 6
 
 ## Tecnologías
