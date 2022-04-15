@@ -1,3 +1,5 @@
+<img align="left" width="116" height="116" src="https://raw.githubusercontent.com/arbems/Clean-Architecture-Solution/main/.github/icon.png" />
+
 # Clean Architecture Solution
 Solución siguiendo los principios de Clean Architecture usando .NET 6
 
