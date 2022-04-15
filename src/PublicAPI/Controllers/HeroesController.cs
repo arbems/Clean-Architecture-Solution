@@ -17,7 +17,7 @@ public class HeroesController : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<SuperHeroBriefDto>>> GetHeroesWithPagination([FromQuery] GetHeroesWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<SuperHeroDto>>> GetHeroesWithPagination([FromQuery] GetHeroesWithPaginationQuery query)
     {
         return await Mediator.Send(query);
     }
