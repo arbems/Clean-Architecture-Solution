@@ -12,12 +12,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 	}
 
     public DbSet<Domain.Entities.Attribute> Attributes => Set<Domain.Entities.Attribute>();
-    public DbSet<HeroAttribute> HeroAttributes => Set<HeroAttribute>();
-    public DbSet<HeroPower> HeroPowers => Set<HeroPower>();
     public DbSet<Publisher> Publishers => Set<Publisher>();
     public DbSet<Race> Races => Set<Race>();
     public DbSet<Superhero> Superheroes => Set<Superhero>();
-    public DbSet<Superpower> Superpowers => Set<Superpower>();
+    public DbSet<Power> Powers => Set<Power>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -22,6 +22,6 @@ public class Superhero
     public int? RaceId { get; set; }
     public Race? Race { get; set; }
 
-    public IList<HeroAttribute> Attributes { get; set; } = new List<HeroAttribute>();
-    public IList<HeroPower> Powers { get; set; } = new List<HeroPower>();
+    public IList<Attribute> Attributes { get; set; } = new List<Attribute>();
+    public IList<Power> Powers { get; set; } = new List<Power>();
 }

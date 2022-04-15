@@ -4,18 +4,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class SuperpowerConfiguration : IEntityTypeConfiguration<Superpower>
+public class PowerConfiguration : IEntityTypeConfiguration<Power>
 {
-    public void Configure(EntityTypeBuilder<Superpower> builder)
+    public void Configure(EntityTypeBuilder<Power> builder)
     {
-        builder.ToTable("superpower");
+        builder.ToTable("Power");
 
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
         builder.Property(e => e.PowerName)
             .HasMaxLength(200)
-            .IsUnicode(false)
-            .HasColumnName("power_name");
+            .IsUnicode(false);
     }
 }

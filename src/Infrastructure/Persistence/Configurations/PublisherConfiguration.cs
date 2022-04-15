@@ -8,14 +8,13 @@ public class PublisherConfiguration : IEntityTypeConfiguration<Publisher>
 {
     public void Configure(EntityTypeBuilder<Publisher> builder)
     {
-        builder.ToTable("publisher");
+        builder.ToTable("Publisher");
 
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property(e => e.Publisher1)
+        builder.Property(e => e.PublisherName)
             .HasMaxLength(50)
-            .IsUnicode(false)
-            .HasColumnName("publisher_name");
+            .IsUnicode(false);
     }
 }

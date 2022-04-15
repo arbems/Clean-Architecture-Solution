@@ -7,5 +7,5 @@ public class Attribute
     public int Id { get; set; }
     public string? AttributeName { get; set; }
 
-    public IList<HeroAttribute> Attributes { get; set; } = new List<HeroAttribute>();
+    public IList<Superhero> Heroes { get; set; } = new List<Superhero>();
 }

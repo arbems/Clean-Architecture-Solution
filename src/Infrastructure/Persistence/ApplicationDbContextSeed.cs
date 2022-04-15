@@ -7,167 +7,173 @@ public class ApplicationDbContextSeed
 {
     public static async Task SeedSampleDataAsync(ApplicationDbContext context)
     {
-        // Seed, if necessary
         if (!context.Attributes.Any())
         {
-            context.Publishers.Add(new Publisher { Id = 1, Publisher1 = "ABC Studios" });
-            context.Publishers.Add(new Publisher { Id = 2, Publisher1 = "DC Comics" });
-            context.Publishers.Add(new Publisher { Id = 3, Publisher1 = "George Lucas" });
-            context.Publishers.Add(new Publisher { Id = 4, Publisher1 = "Icon Comics" });
-            context.Publishers.Add(new Publisher { Id = 5, Publisher1 = "J. K. Rowling" });
-            context.Publishers.Add(new Publisher { Id = 6, Publisher1 = "Marvel Comics" });
-            //...
+            context.Publishers.AddRange(
+                new Publisher { Id = 1, PublisherName = "ABC Studios" },
+                new Publisher { Id = 2, PublisherName = "DC Comics" },
+                new Publisher { Id = 3, PublisherName = "George Lucas" },
+                new Publisher { Id = 4, PublisherName = "Icon Comics" },
+                new Publisher { Id = 5, PublisherName = "J. K. Rowling" },
+                new Publisher { Id = 6, PublisherName = "Marvel Comics" }
+            );
 
-            context.Races.Add(new Race { Id = 1, Race1 = "Alien" });
-            context.Races.Add(new Race { Id = 2, Race1 = "Android" });
-            context.Races.Add(new Race { Id = 3, Race1 = "Animal" });
-            context.Races.Add(new Race { Id = 4, Race1 = "Demon" });
-            context.Races.Add(new Race { Id = 5, Race1 = "Eternal" });
-            context.Races.Add(new Race { Id = 6, Race1 = "Human" });
-            //...
+            context.Races.AddRange(
+                new Race { Id = 1, RaceName = "Alien" },
+                new Race { Id = 2, RaceName = "Android" },
+                new Race { Id = 3, RaceName = "Animal" },
+                new Race { Id = 4, RaceName = "Demon" },
+                new Race { Id = 5, RaceName = "Eternal" },
+                new Race { Id = 6, RaceName = "Human" }
+            );
 
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 1, AttributeName = "Intelligence" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 2, AttributeName = "Strength" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 3, AttributeName = "Speed" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 4, AttributeName = "Durability" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 5, AttributeName = "Power" });
-            context.Attributes.Add(new Domain.Entities.Attribute { Id = 6, AttributeName = "Combat" });
-            //..
+            context.Attributes.AddRange(
+                new Domain.Entities.Attribute { Id = 1, AttributeName = "Intelligence" },
+                new Domain.Entities.Attribute { Id = 2, AttributeName = "Strength" },
+                new Domain.Entities.Attribute { Id = 3, AttributeName = "Speed" },
+                new Domain.Entities.Attribute { Id = 4, AttributeName = "Durability" },
+                new Domain.Entities.Attribute { Id = 5, AttributeName = "Power" },
+                new Domain.Entities.Attribute { Id = 6, AttributeName = "Combat" }
+            );
 
-            context.Superpowers.Add(new Superpower { Id = 1, PowerName = "Agility" });
-            context.Superpowers.Add(new Superpower { Id = 2, PowerName = "Accelerated Healing" });
-            context.Superpowers.Add(new Superpower { Id = 3, PowerName = "Lantern Power Ring" });
-            context.Superpowers.Add(new Superpower { Id = 4, PowerName = "Cold Resistance" });
-            context.Superpowers.Add(new Superpower { Id = 5, PowerName = "Marksmanship" });
-            context.Superpowers.Add(new Superpower { Id = 6, PowerName = "Power Augmentation" });
-            //...
+            context.Powers.AddRange(
+                new Power { Id = 1, PowerName = "Agility" },
+                new Power { Id = 2, PowerName = "Accelerated Healing" },
+                new Power { Id = 3, PowerName = "Lantern Power Ring" },
+                new Power { Id = 4, PowerName = "Cold Resistance" },
+                new Power { Id = 5, PowerName = "Marksmanship" },
+                new Power { Id = 6, PowerName = "Power Augmentation" }
+            );
 
-            context.Superheroes.Add(new Superhero
-            {
-                Id = 1,
-                Alignment = Alignment.Good,
-                EyeColour = Colour.Amber,
-                Gender = Gender.Male,
-                HairColour = Colour.Auburn,
-                HeightCm = 183,
-                WeightKg = 83,
-                PublisherId = 1,
-                RaceId = 1,
-                SkinColour = Colour.Black,
-                SuperheroName = "Animal Man",
-                FullName = "Bernhard Baker",
-                Attributes =
+            await context.SaveChangesAsync();
+
+            context.Superheroes.AddRange(
+                new Superhero
                 {
-                    new HeroAttribute { AttributeId = 6 },
-                    new HeroAttribute { AttributeId = 2 }
+                    Id = 1,
+                    Alignment = Alignment.Good,
+                    EyeColour = Colour.Amber,
+                    Gender = Gender.Male,
+                    HairColour = Colour.Auburn,
+                    HeightCm = 183,
+                    WeightKg = 83,
+                    PublisherId = 1,
+                    RaceId = 1,
+                    SkinColour = Colour.Black,
+                    SuperheroName = "Animal Man",
+                    FullName = "Bernhard Baker",
+                    Attributes =
+                    {
+                        context.Attributes.FindAsync(1).Result!,
+                        context.Attributes.FindAsync(2).Result!
+                    },
+                    Powers =
+                    {
+                        context.Powers.FindAsync(3).Result!,
+                        context.Powers.FindAsync(4).Result!
+                    }
                 },
-                Powers =
+                new Superhero
                 {
-                    new HeroPower { PowerId = 3, HeroId = 1 },
-                    new HeroPower { PowerId = 4, HeroId = 1 }
-                }
-            });
-            context.Superheroes.Add(new Superhero
-            {
-                Id = 2,
-                Alignment = Alignment.Good,
-                EyeColour = Colour.Amber,
-                Gender = Gender.Male,
-                HairColour = Colour.Auburn,
-                HeightCm = 180,
-                WeightKg = 85,
-                PublisherId = 1,
-                RaceId = 1,
-                SkinColour = Colour.Black,
-                SuperheroName = "Ant-Man",
-                FullName = "Henry Jonathan Pym",
-                Attributes =
-                {
-                    new HeroAttribute { AttributeId = 3 },
-                    new HeroAttribute { AttributeId = 4 }
+                    Id = 2,
+                    Alignment = Alignment.Good,
+                    EyeColour = Colour.Amber,
+                    Gender = Gender.Male,
+                    HairColour = Colour.Auburn,
+                    HeightCm = 180,
+                    WeightKg = 85,
+                    PublisherId = 1,
+                    RaceId = 1,
+                    SkinColour = Colour.Black,
+                    SuperheroName = "Ant-Man",
+                    FullName = "Henry Jonathan Pym",
+                    Attributes =
+                    {
+                        context.Attributes.FindAsync(1).Result!,
+                        context.Attributes.FindAsync(2).Result!
+                    },
+                        Powers =
+                    {
+                        context.Powers.FindAsync(3).Result!,
+                        context.Powers.FindAsync(4).Result!
+                    }
                 },
-                Powers =
+                new Superhero
                 {
-                    new HeroPower { PowerId = 1, HeroId = 2 },
-                    new HeroPower { PowerId = 2, HeroId = 2 }
-                }
-            });
-            context.Superheroes.Add(new Superhero
-            {
-                Id = 3,
-                Alignment = Alignment.Good,
-                EyeColour = Colour.Amber,
-                Gender = Gender.Male,
-                HairColour = Colour.Auburn,
-                HeightCm = 188,
-                WeightKg = 95,
-                PublisherId = 1,
-                RaceId = 1,
-                SkinColour = Colour.Black,
-                SuperheroName = "Batman",
-                FullName = "Bruce Wayne",
-                Attributes =
-                {
-                    new HeroAttribute { AttributeId = 1 },
-                    new HeroAttribute { AttributeId = 2 }
+                    Id = 3,
+                    Alignment = Alignment.Good,
+                    EyeColour = Colour.Amber,
+                    Gender = Gender.Male,
+                    HairColour = Colour.Auburn,
+                    HeightCm = 188,
+                    WeightKg = 95,
+                    PublisherId = 1,
+                    RaceId = 1,
+                    SkinColour = Colour.Black,
+                    SuperheroName = "Batman",
+                    FullName = "Bruce Wayne",
+                    Attributes =
+                    {
+                        context.Attributes.FindAsync(1).Result!,
+                        context.Attributes.FindAsync(2).Result!
+                    },
+                        Powers =
+                    {
+                        context.Powers.FindAsync(3).Result!,
+                        context.Powers.FindAsync(4).Result!
+                    }
                 },
-                Powers =
+                new Superhero
                 {
-                    new HeroPower { PowerId = 3, HeroId = 3 },
-                    new HeroPower { PowerId = 4, HeroId = 3 }
-                }
-            });
-            context.Superheroes.Add(new Superhero
-            {
-                Id = 4,
-                Alignment = Alignment.Good,
-                EyeColour = Colour.Amber,
-                Gender = Gender.Male,
-                HairColour = Colour.Auburn,
-                HeightCm = 160,
-                WeightKg = 90,
-                PublisherId = 1,
-                RaceId = 1,
-                SkinColour = Colour.Black,
-                SuperheroName = "Bionic Woman",
-                FullName = "Jamie Wells Sommers",
-                Attributes =
-                {
-                    new HeroAttribute { AttributeId = 1 },
-                    new HeroAttribute { AttributeId = 4 }
+                    Id = 4,
+                    Alignment = Alignment.Good,
+                    EyeColour = Colour.Amber,
+                    Gender = Gender.Male,
+                    HairColour = Colour.Auburn,
+                    HeightCm = 160,
+                    WeightKg = 90,
+                    PublisherId = 1,
+                    RaceId = 1,
+                    SkinColour = Colour.Black,
+                    SuperheroName = "Bionic Woman",
+                    FullName = "Jamie Wells Sommers",
+                    Attributes =
+                    {
+                        context.Attributes.FindAsync(1).Result!,
+                        context.Attributes.FindAsync(2).Result!
+                    },
+                        Powers =
+                    {
+                        context.Powers.FindAsync(3).Result!,
+                        context.Powers.FindAsync(4).Result!
+                    }
                 },
-                Powers =
+                new Superhero
                 {
-                    new HeroPower { PowerId = 1, HeroId = 4 },
-                    new HeroPower { PowerId = 2, HeroId = 4 }
+                    Id = 5,
+                    Alignment = Alignment.Good,
+                    EyeColour = Colour.Amber,
+                    Gender = Gender.Male,
+                    HairColour = Colour.Auburn,
+                    HeightCm = 170,
+                    WeightKg = 87,
+                    PublisherId = 1,
+                    RaceId = 1,
+                    SkinColour = Colour.Black,
+                    SuperheroName = "Black Bolt",
+                    FullName = "Blackagar Boltagon",
+                    Attributes =
+                    {
+                        context.Attributes.FindAsync(1).Result!,
+                        context.Attributes.FindAsync(2).Result!
+                    },
+                        Powers =
+                    {
+                        context.Powers.FindAsync(3).Result!,
+                        context.Powers.FindAsync(4).Result!
+                    }
                 }
-            });
-            context.Superheroes.Add(new Superhero
-            {
-                Id = 5,
-                Alignment = Alignment.Good,
-                EyeColour = Colour.Amber,
-                Gender = Gender.Male,
-                HairColour = Colour.Auburn,
-                HeightCm = 170,
-                WeightKg = 87,
-                PublisherId = 1,
-                RaceId = 1,
-                SkinColour = Colour.Black,
-                SuperheroName = "Black Bolt",
-                FullName = "Blackagar Boltagon",
-                Attributes =
-                {
-                    new HeroAttribute { AttributeId = 3 },
-                    new HeroAttribute { AttributeId = 5 }
-                },
-                Powers =
-                {
-                    new HeroPower { PowerId = 5, HeroId = 5 },
-                    new HeroPower { PowerId = 6, HeroId = 5 }
-                }
-            });
-            //...
+            );
 
             await context.SaveChangesAsync();
         }

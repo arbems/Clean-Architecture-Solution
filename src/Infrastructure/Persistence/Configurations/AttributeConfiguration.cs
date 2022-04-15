@@ -8,14 +8,13 @@ public class AttributeConfiguration : IEntityTypeConfiguration<Domain.Entities.A
 {
     public void Configure(EntityTypeBuilder<Domain.Entities.Attribute> builder)
     {
-        builder.ToTable("attribute");
+        builder.ToTable("Attribute");
 
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
         builder.Property(e => e.AttributeName)
             .HasMaxLength(200)
-            .IsUnicode(false)
-            .HasColumnName("attribute_name");
+            .IsUnicode(false);
     }
 }

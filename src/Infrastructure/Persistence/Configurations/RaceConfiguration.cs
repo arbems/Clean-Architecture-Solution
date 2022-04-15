@@ -8,14 +8,13 @@ public class RaceConfiguration : IEntityTypeConfiguration<Race>
 {
     public void Configure(EntityTypeBuilder<Race> builder)
     {
-        builder.ToTable("race");
+        builder.ToTable("Race");
 
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property(e => e.Race1)
+        builder.Property(e => e.RaceName)
             .HasMaxLength(100)
-            .IsUnicode(false)
-            .HasColumnName("race");
+            .IsUnicode(false);
     }
 }
