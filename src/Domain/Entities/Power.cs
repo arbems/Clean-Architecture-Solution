@@ -1,6 +1,8 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Common;
 
-public class Power
+namespace Domain.Entities;
+
+public class Power : AuditableEntity
 {
     public int Id { get; set; }
     public string PowerName { get; set; }

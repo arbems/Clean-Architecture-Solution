@@ -26,4 +26,9 @@ public class SuperHeroBriefDto : IMapFrom<Superhero>
 
     public IList<Domain.Entities.Attribute> Attributes { get; set; } = new List<Domain.Entities.Attribute>();
     public IList<Power> Powers { get; set; } = new List<Power>();
+
+    public DateTime Created { get; set; }
+    public string? CreatedBy { get; set; }
+    public DateTime? LastModified { get; set; }
+    public string? LastModifiedBy { get; set; }
 }

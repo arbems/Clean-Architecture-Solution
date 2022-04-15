@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Application.Common.Interfaces;
+using Domain.Common;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,13 @@ namespace Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    private readonly IDateTime _dateTime;
+
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options,
+        IDateTime dateTime) : base(options)
     {
+        _dateTime = dateTime;
 	}
 
     public DbSet<Domain.Entities.Attribute> Attributes => Set<Domain.Entities.Attribute>();
@@ -22,5 +28,38 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(modelBuilder);
+    }
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+        foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedBy = "UserId";
+                    entry.Entity.Created = _dateTime.Now;
+                    break;
+
+                case EntityState.Modified:
+                    entry.Entity.LastModifiedBy = "UserId";
+                    entry.Entity.LastModified = _dateTime.Now;
+                    break;
+            }
+        }
+
+        // TODO:
+        /*var events = ChangeTracker.Entries<IHasDomainEvent>()
+                .Select(x => x.Entity.DomainEvents)
+                .SelectMany(x => x)
+                .Where(domainEvent => !domainEvent.IsPublished)
+                .ToArray();*/
+
+        var result = await base.SaveChangesAsync(cancellationToken);
+
+        // TODO:
+        //await DispatchEvents(events);
+
+        return result;
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Domain.Common;
 
 namespace Domain.Entities;
 
-public class Attribute
+public class Attribute : AuditableEntity
 {
     public int Id { get; set; }
     public string? AttributeName { get; set; }

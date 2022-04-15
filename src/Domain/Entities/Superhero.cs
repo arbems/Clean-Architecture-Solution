@@ -1,8 +1,9 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Common;
+using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
-public class Superhero
+public class Superhero : AuditableEntity
 {
     public int Id { get; set; }
     public string? SuperheroName { get; set; }
