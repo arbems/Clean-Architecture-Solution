@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.SuperHeroes.Queries.GetHeroesWithPagination;
 
-public class GetHeroesWithPaginationQuery : IRequest<PaginatedList<SuperHeroDto>>
+public class GetHeroesWithPaginationQuery : IRequest<PaginatedList<SuperheroDto>>
 {
     public int PageNumber { get; set; } = 1;
     public int PageSize { get; set; } = 10;
 }
 
-public class GetHeroesWithPaginationQueryHandler : IRequestHandler<GetHeroesWithPaginationQuery, PaginatedList<SuperHeroDto>>
+public class GetHeroesWithPaginationQueryHandler : IRequestHandler<GetHeroesWithPaginationQuery, PaginatedList<SuperheroDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -25,11 +25,11 @@ public class GetHeroesWithPaginationQueryHandler : IRequestHandler<GetHeroesWith
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<SuperHeroDto>> Handle(GetHeroesWithPaginationQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<SuperheroDto>> Handle(GetHeroesWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.Superheroes.AsNoTracking()
             .OrderBy(x => x.SuperheroName)
-            .ProjectTo<SuperHeroDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<SuperheroDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
 }

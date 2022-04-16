@@ -11,12 +11,16 @@
     <None Remove="Common\Interfaces\" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="SuperHeroes\Commands\DeleteHero\" />
+    <None Remove="SuperHeroes\Commands\UpdateHero\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Interfaces\" />
     <Folder Include="SuperHeroes\Commands\CreateHero\" />
+    <Folder Include="SuperHeroes\Commands\DeleteHero\" />
+    <Folder Include="SuperHeroes\Commands\UpdateHero\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />

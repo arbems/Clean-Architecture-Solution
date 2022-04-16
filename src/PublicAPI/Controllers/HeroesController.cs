@@ -1,4 +1,7 @@
 ﻿using Application.Common.Models;
+using Application.SuperHeroes.Commands.CreateHero;
+using Application.SuperHeroes.Commands.DeleteHero;
+using Application.SuperHeroes.Commands.UpdateHero;
 using Application.SuperHeroes.Queries.GetHeroesWithPagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +20,36 @@ public class HeroesController : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedList<SuperHeroDto>>> GetHeroesWithPagination([FromQuery] GetHeroesWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<SuperheroDto>>> GetHeroesWithPagination([FromQuery] GetHeroesWithPaginationQuery query)
     {
         return await Mediator.Send(query);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<int>> Create([FromForm] CreateHeroCommand command)
+    {
+        return await Mediator.Send(command);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, UpdateHeroCommand command)
+    {
+        if (id != command.Id)
+        {
+            return BadRequest();
+        }
+
+        await Mediator.Send(command);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        await Mediator.Send(new DeleteHeroCommand { Id = id });
+
+        return NoContent();
     }
 }
 

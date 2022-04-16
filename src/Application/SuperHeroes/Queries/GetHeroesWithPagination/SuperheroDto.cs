@@ -4,7 +4,7 @@ using Domain.ValueObjects;
 
 namespace Application.SuperHeroes.Queries.GetHeroesWithPagination;
 
-public class SuperHeroDto : IMapFrom<Superhero>
+public class SuperheroDto : IMapFrom<Superhero>
 {
     public int Id { get; set; }
     public string SuperheroName { get; set; } = String.Empty;
@@ -22,11 +22,6 @@ public class SuperHeroDto : IMapFrom<Superhero>
 
     public RaceDto? Race { get; set; }
 
-    public IList<AttributeDto> Attributes { get; set; } = new List<AttributeDto>();
-    public IList<PowerDto> Powers { get; set; } = new List<PowerDto>();
-
-    public DateTime Created { get; set; }
-    public string? CreatedBy { get; set; }
-    public DateTime? LastModified { get; set; }
-    public string? LastModifiedBy { get; set; }
+    public List<AttributeDto> Attributes { get; set; } = new();
+    public List<PowerDto> Powers { get; set; } = new();
 }

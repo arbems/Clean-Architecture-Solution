@@ -15,9 +15,6 @@ public static class DependencyInjection
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("CleanArchitectureDb"));
-
-            // Seed data
-            
         }
         else
         {
