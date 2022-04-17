@@ -14,14 +14,16 @@
     <None Remove="SuperHeroes\Commands\DeleteHero\" />
     <None Remove="SuperHeroes\Commands\UpdateHero\" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
+    <None Remove="SuperHeroes\EventHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Interfaces\" />
-    <Folder Include="SuperHeroes\Commands\CreateHero\" />
-    <Folder Include="SuperHeroes\Commands\DeleteHero\" />
-    <Folder Include="SuperHeroes\Commands\UpdateHero\" />
+    <Folder Include="Superheroes\Commands\CreateHero\" />
+    <Folder Include="Superheroes\Commands\DeleteHero\" />
+    <Folder Include="Superheroes\Commands\UpdateHero\" />
+    <Folder Include="Superheroes\EventHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />

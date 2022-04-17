@@ -3,7 +3,7 @@ using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
-public class Superhero : AuditableEntity
+public class Superhero : AuditableEntity, IHasDomainEvent
 {
     public int Id { get; set; }
     public string? SuperheroName { get; set; }
@@ -25,4 +25,6 @@ public class Superhero : AuditableEntity
 
     public IList<Attribute> Attributes { get; set; } = new List<Attribute>();
     public IList<Power> Powers { get; set; } = new List<Power>();
+
+    public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
 }

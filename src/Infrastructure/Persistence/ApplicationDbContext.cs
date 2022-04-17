@@ -9,26 +9,23 @@ namespace Infrastructure.Persistence;
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     private readonly IDateTime _dateTime;
+    private readonly IDomainEventService _domainEventService;
 
     public ApplicationDbContext(
         DbContextOptions<ApplicationDbContext> options,
-        IDateTime dateTime) : base(options)
+        IDateTime dateTime,
+        IDomainEventService domainEventService) : base(options)
     {
         _dateTime = dateTime;
-	}
+        _domainEventService = domainEventService;
+
+    }
 
     public DbSet<Domain.Entities.Attribute> Attributes => Set<Domain.Entities.Attribute>();
     public DbSet<Publisher> Publishers => Set<Publisher>();
     public DbSet<Race> Races => Set<Race>();
     public DbSet<Superhero> Superheroes => Set<Superhero>();
     public DbSet<Power> Powers => Set<Power>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-        base.OnModelCreating(modelBuilder);
-    }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
@@ -50,12 +47,11 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             }
         }
 
-        // TODO:
-        /*var events = ChangeTracker.Entries<IHasDomainEvent>()
+        var events = ChangeTracker.Entries<IHasDomainEvent>()
                 .Select(x => x.Entity.DomainEvents)
                 .SelectMany(x => x)
                 .Where(domainEvent => !domainEvent.IsPublished)
-                .ToArray();*/
+                .ToArray();
 
         var result = 0;
 
@@ -65,13 +61,28 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         }
         catch (DbUpdateConcurrencyException ex)
         {
-            // Update the values of the entity that failed to save from the store
+            // Update the values of the entity that failed to save from the store (https://docs.microsoft.com/es-es/ef/ef6/saving/concurrency)
             ex.Entries.Single().Reload();
         }
 
-        // TODO:
-        //await DispatchEvents(events);
+        await DispatchEvents(events);
 
         return result;
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        base.OnModelCreating(modelBuilder);
+    }
+
+    private async Task DispatchEvents(DomainEvent[] events)
+    {
+        foreach (var @event in events)
+        {
+            @event.IsPublished = true;
+            await _domainEventService.Publish(@event);
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
+using Domain.Events;
 using Domain.ValueObjects;
 using MediatR;
 
-namespace Application.SuperHeroes.Commands.CreateHero;
+namespace Application.Superheroes.Commands.CreateHero;
 
 public class CreateHeroCommand : IRequest<int>
 {
@@ -53,6 +54,8 @@ public class CreateHeroCommandHandler : IRequestHandler<CreateHeroCommand, int>
             Attributes = _context.Attributes.Where(a=> request.Attributes.Contains(a.Id)).ToList(),
             Powers = _context.Powers.Where(a => request.Powers.Contains(a.Id)).ToList()
         };
+
+        entity.DomainEvents.Add(new SuperheroCreatedEvent(entity));
 
         _context.Superheroes.Add(entity);
 

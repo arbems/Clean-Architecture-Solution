@@ -1,6 +1,6 @@
 ﻿using Application.Common.Mappings;
 
-namespace Application.SuperHeroes.Queries.GetHeroesWithPagination;
+namespace Application.Superheroes.Queries.GetHeroesWithPagination;
 
 public class AttributeDto : IMapFrom<Domain.Entities.Attribute>
 {

@@ -1,6 +1,7 @@
 ﻿using Application;
 using Infrastructure;
 using Infrastructure.Persistence;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,15 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Superheroes",
+        Description = "Demo API - Clean Architecture Solution in .NET 6",
+    });
+});
 
 var app = builder.Build();
 
@@ -28,8 +37,13 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.InjectStylesheet("/swagger-ui/custom.css");
+    });
 }
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

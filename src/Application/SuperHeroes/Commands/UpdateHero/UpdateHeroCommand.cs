@@ -4,7 +4,7 @@ using Application.Common.Exceptions;
 using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Application.SuperHeroes.Commands.UpdateHero;
+namespace Application.Superheroes.Commands.UpdateHero;
 
 public class UpdateHeroCommand : IRequest
 {

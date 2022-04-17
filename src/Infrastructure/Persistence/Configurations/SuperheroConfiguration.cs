@@ -10,6 +10,8 @@ public class SuperheroConfiguration : IEntityTypeConfiguration<Superhero>
     {
         builder.ToTable("SuperHero");
 
+        builder.Ignore(e => e.DomainEvents);
+
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 

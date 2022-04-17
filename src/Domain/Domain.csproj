@@ -11,11 +11,13 @@
     <None Remove="ValueObjects\" />
     <None Remove="Common\" />
     <None Remove="Exceptions\" />
+    <None Remove="Events\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="ValueObjects\" />
     <Folder Include="Common\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Events\" />
   </ItemGroup>
 </Project>

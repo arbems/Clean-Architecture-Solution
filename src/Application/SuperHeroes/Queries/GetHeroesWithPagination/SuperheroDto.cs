@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Application.SuperHeroes.Queries.GetHeroesWithPagination;
+namespace Application.Superheroes.Queries.GetHeroesWithPagination;
 
 public class SuperheroDto : IMapFrom<Superhero>
 {

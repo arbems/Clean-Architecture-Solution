@@ -1,7 +1,7 @@
 ﻿using Application.Common.Mappings;
 using Domain.Entities;
 
-namespace Application.SuperHeroes.Queries.GetHeroesWithPagination;
+namespace Application.Superheroes.Queries.GetHeroesWithPagination;
 
 public class PublisherDto : IMapFrom<Publisher>
 {
