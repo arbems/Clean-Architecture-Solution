@@ -39,11 +39,13 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                 case EntityState.Added:
                     entry.Entity.CreatedBy = "UserId";
                     entry.Entity.Created = _dateTime.Now;
+                    entry.Entity.RowVersion = Guid.NewGuid();
                     break;
 
                 case EntityState.Modified:
                     entry.Entity.LastModifiedBy = "UserId";
                     entry.Entity.LastModified = _dateTime.Now;
+                    entry.Entity.RowVersion = Guid.NewGuid();
                     break;
             }
         }
@@ -55,7 +57,17 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                 .Where(domainEvent => !domainEvent.IsPublished)
                 .ToArray();*/
 
-        var result = await base.SaveChangesAsync(cancellationToken);
+        var result = 0;
+
+        try
+        {
+            result = await base.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Update the values of the entity that failed to save from the store
+            ex.Entries.Single().Reload();
+        }
 
         // TODO:
         //await DispatchEvents(events);

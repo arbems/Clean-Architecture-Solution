@@ -13,6 +13,10 @@ public class SuperheroConfiguration : IEntityTypeConfiguration<Superhero>
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
+        builder.Property(p => p.RowVersion)
+           .IsConcurrencyToken()
+           .ValueGeneratedOnAddOrUpdate();
+
         builder.Property(e => e.FullName)
             .HasMaxLength(200)
             .IsUnicode(false);

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Common
 {
     public abstract class AuditableEntity
@@ -10,5 +12,7 @@ namespace Domain.Common
         public DateTime? LastModified { get; set; }
 
         public string? LastModifiedBy { get; set; }
+
+        public Guid RowVersion { get; set; }
     }
 }

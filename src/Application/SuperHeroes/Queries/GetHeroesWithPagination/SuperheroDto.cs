@@ -24,4 +24,10 @@ public class SuperheroDto : IMapFrom<Superhero>
 
     public List<AttributeDto> Attributes { get; set; } = new();
     public List<PowerDto> Powers { get; set; } = new();
+
+    public DateTime Created { get; set; }
+    public string? CreatedBy { get; set; }
+    public DateTime? LastModified { get; set; }
+    public string? LastModifiedBy { get; set; }
+    public Guid RowVersion { get; set; }
 }

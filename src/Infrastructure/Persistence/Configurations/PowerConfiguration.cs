@@ -13,6 +13,10 @@ public class PowerConfiguration : IEntityTypeConfiguration<Power>
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
+        builder.Property(p => p.RowVersion)
+           .IsConcurrencyToken()
+           .ValueGeneratedOnAddOrUpdate();
+
         builder.Property(e => e.PowerName)
             .HasMaxLength(200)
             .IsUnicode(false);

@@ -13,6 +13,7 @@
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="SuperHeroes\Commands\DeleteHero\" />
     <None Remove="SuperHeroes\Commands\UpdateHero\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />

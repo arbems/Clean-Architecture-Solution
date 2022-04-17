@@ -13,6 +13,10 @@ public class PublisherConfiguration : IEntityTypeConfiguration<Publisher>
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
+        builder.Property(p => p.RowVersion)
+           .IsConcurrencyToken()
+           .ValueGeneratedOnAddOrUpdate();
+
         builder.Property(e => e.PublisherName)
             .HasMaxLength(50)
             .IsUnicode(false);

@@ -13,6 +13,10 @@ public class RaceConfiguration : IEntityTypeConfiguration<Race>
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
+        builder.Property(p => p.RowVersion)
+           .IsConcurrencyToken()
+           .ValueGeneratedOnAddOrUpdate();
+
         builder.Property(e => e.RaceName)
             .HasMaxLength(100)
             .IsUnicode(false);

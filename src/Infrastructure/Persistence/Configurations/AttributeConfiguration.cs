@@ -13,6 +13,10 @@ public class AttributeConfiguration : IEntityTypeConfiguration<Domain.Entities.A
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
+        builder.Property(p => p.RowVersion)
+           .IsConcurrencyToken()
+           .ValueGeneratedOnAddOrUpdate();
+
         builder.Property(e => e.AttributeName)
             .HasMaxLength(200)
             .IsUnicode(false);
