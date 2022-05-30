@@ -6,8 +6,8 @@ namespace Domain.Entities;
 public class Superhero : AuditableEntity, IHasDomainEvent
 {
     public int Id { get; set; }
-    public string? SuperheroName { get; set; }
-    public string? FullName { get; set; } 
+    public string SuperheroName { get; set; } = String.Empty;
+    public string? FullName { get; set; }
     public int? HeightCm { get; set; }
     public int? WeightKg { get; set; }
 

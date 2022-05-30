@@ -9,7 +9,7 @@ namespace Application.Superheroes.Commands.CreateHero;
 public class CreateHeroCommand : IRequest<int>
 {
     public string SuperheroName { get; set; } = String.Empty;
-    public string FullName { get; set; } = String.Empty;
+    public string? FullName { get; set; } = String.Empty;
     public int? HeightCm { get; set; }
     public int? WeightKg { get; set; }
 
@@ -19,9 +19,9 @@ public class CreateHeroCommand : IRequest<int>
     public string? Alignment { get; set; }
     public string? Gender { get; set; }
 
-    public int PublisherId { get; set; }
+    public int? PublisherId { get; set; }
 
-    public int RaceId { get; set; }
+    public int? RaceId { get; set; }
 
     public List<int> Attributes { get; set; } = new();
     public List<int> Powers { get; set; } = new();
@@ -51,7 +51,7 @@ public class CreateHeroCommandHandler : IRequestHandler<CreateHeroCommand, int>
             Gender = string.IsNullOrEmpty(request.Gender) ? Gender.NA : Gender.From(request.Gender),
             Publisher = _context.Publishers.FindAsync(request.PublisherId).Result,
             Race = _context.Races.FindAsync(request.RaceId).Result,
-            Attributes = _context.Attributes.Where(a=> request.Attributes.Contains(a.Id)).ToList(),
+            Attributes = _context.Attributes.Where(a => request.Attributes.Contains(a.Id)).ToList(),
             Powers = _context.Powers.Where(a => request.Powers.Contains(a.Id)).ToList()
         };
 

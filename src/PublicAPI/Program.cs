@@ -1,7 +1,9 @@
 ﻿using Application;
+using FluentValidation.AspNetCore;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
+using PublicAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,10 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Demo API - Clean Architecture Solution in .NET 6",
     });
 });
+
+builder.Services.AddControllersWithViews(options =>
+            options.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
 var app = builder.Build();
 

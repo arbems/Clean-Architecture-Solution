@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Persistence;
 

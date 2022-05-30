@@ -20,9 +20,7 @@
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviours\" />
     <Folder Include="Common\Interfaces\" />
-    <Folder Include="Superheroes\Commands\CreateHero\" />
     <Folder Include="Superheroes\Commands\DeleteHero\" />
-    <Folder Include="Superheroes\Commands\UpdateHero\" />
     <Folder Include="Superheroes\EventHandlers\" />
   </ItemGroup>
   <ItemGroup>

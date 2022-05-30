@@ -1,8 +1,8 @@
-﻿using Application.Common.Interfaces;
-using MediatR;
-using Application.Common.Exceptions;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using Domain.ValueObjects;
+using MediatR;
 
 namespace Application.Superheroes.Commands.UpdateHero;
 
@@ -10,7 +10,7 @@ public class UpdateHeroCommand : IRequest
 {
     public int Id { get; set; }
     public string SuperheroName { get; set; } = String.Empty;
-    public string FullName { get; set; } = String.Empty;
+    public string? FullName { get; set; } = String.Empty;
     public int? HeightCm { get; set; }
     public int? WeightKg { get; set; }
 
@@ -20,9 +20,9 @@ public class UpdateHeroCommand : IRequest
     public string? Alignment { get; set; }
     public string? Gender { get; set; }
 
-    public int PublisherId { get; set; }
+    public int? PublisherId { get; set; }
 
-    public int RaceId { get; set; }
+    public int? RaceId { get; set; }
 
     public List<int> Attributes { get; set; } = new();
     public List<int> Powers { get; set; } = new();
