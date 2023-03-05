@@ -1,7 +1,7 @@
 <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/arbems/Clean-Architecture-Solution/main/.github/icon.png" />
 
 # Clean Architecture Solution .NET 6
-Este repositorio contiene los ejemplos que muestran una solución siguiendo los principios de Clean Architecture usando .NET 6
+Example of a solution following the principles of Clean Architecture using .NET 6
 
 ## Tecnologías
 * NET 6 / C#
